@@ -8,13 +8,6 @@ from generate import generate_workflow_diagram
 
 DIAGRAM_IMAGE_PATH = Path("assets/data/workflow_diagram.png")
 
-# text_client = genai.GenerativeModel(
-    
-# )
-
-# image_client = genai.GenerativeModel(
-#     model_name="gemini-3-pro-image-preview"
-# )
 client = genai.Client()
 i = 0
 
@@ -57,6 +50,6 @@ print("🖼  Generating workflow diagram with Nano Banana Pro...")
 diagram_path = generate_workflow_diagram(client, workflow, DIAGRAM_IMAGE_PATH)
 print(f"✅ Workflow diagram saved to {diagram_path}")
 
-delete_steps("workflow")
+# delete_steps("workflow")
 
 print("\nDone!")
