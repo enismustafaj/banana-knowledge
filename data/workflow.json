@@ -1,0 +1,25 @@
+{
+  "workflow_name": "Production Incident Triage Workflow",
+  "steps": [
+    {
+      "id": 1,
+      "text": "Open the incident in Datadog to check graphs for error rate, latency, and impacted endpoints. If the error rate exceeds the baseline for more than five minutes, treat it as a real incident."
+    },
+    {
+      "id": 2,
+      "text": "Open logs in Kibana filtered by service name and error code. Scan for recent stack traces and note patterns like timeouts, database errors, or bad configurations."
+    },
+    {
+      "id": 3,
+      "text": "Create a Jira incident ticket using the \"Incident\" template. Include the alert link, suspected root cause, and impacted customers or features."
+    },
+    {
+      "id": 4,
+      "text": "Share the ticket link and a summary in the #incidents Slack channel. Assign an incident commander if one is not already assigned."
+    },
+    {
+      "id": 5,
+      "text": "Update the ticket with any immediate mitigation steps taken, such as rollbacks or scaling adjustments, to provide full context."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+google-genai>=1.52.0
+fastapi
+uvicorn[standard]
+pydantic
+Pillow

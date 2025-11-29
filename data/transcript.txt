@@ -1,0 +1,11 @@
+In this session I’m going to walk through our production incident triage workflow.
+
+Step 1: When an alert fires in Datadog, I open the incident from the alerts page and quickly check the graphs for error rate, latency, and impacted endpoints. If the error rate has been above our usual baseline for more than five minutes, I treat it as a real incident and move to the next step.
+
+Step 2: Next, I open the logs in Kibana, filtered by the service name and the error code that appears in the alert. I scan for recent stack traces and note any obvious patterns like timeouts, database errors, or bad configuration.
+
+Step 3: Once I confirm it’s a real issue, I create a Jira incident ticket using our “Incident” template, including the alert link, the suspected root cause if we have one, and the impacted customers or features.
+
+Step 4: After the ticket is created, I share the link in the #incidents Slack channel with a short summary, and I assign an incident commander if one is not already assigned.
+
+Step 5: Finally, I update the ticket with any immediate mitigation steps we’ve taken, such as rolling back a deployment, scaling up replicas, or disabling a feature flag, so the next person who looks at the ticket has full context.
