@@ -150,8 +150,8 @@ def generate_workflow_diagram(
             continue
         # Shorten very long texts for the diagram label
         short_text = text
-        if len(short_text) > 120:
-            short_text = short_text[:117] + "..."
+        # if len(short_text) > 120:
+        #     short_text = short_text[:117] + "..."
         step_lines.append(f"- Step {sid}: {short_text}")
 
     steps_block = "\n".join(step_lines) if step_lines else "- (No steps extracted)"
@@ -176,15 +176,16 @@ Design:
 - 16:9 aspect ratio
 - Suitable as a visual summary of the workflow
 """.strip()
+    
+    print(steps_block)
 
     response = client.models.generate_content(
-        model=IMAGE_MODEL_ID,
         contents=diagram_prompt,
+        model="gemini-3-pro-image-preview",
         config=types.GenerateContentConfig(
             response_modalities=["Image"],
             image_config=types.ImageConfig(
                 aspect_ratio="16:9",
-                image_size="1K",
             ),
         ),
     )
@@ -202,32 +203,32 @@ Design:
 
 # ---------- MAIN SCRIPT ----------
 
-def main():
-    print("🔧 Reading transcript for workflow...")
-    transcript = read_transcript(TRANSCRIPT_PATH)
+# def main():
+#     print("🔧 Reading transcript for workflow...")
+#     transcript = read_transcript(TRANSCRIPT_PATH)
 
-    print("🤖 Initializing Gemini client...")
-    client = get_client()
+#     print("🤖 Initializing Gemini client...")
+#     client = get_client()
 
-    print("📄 Generating simple WORKFLOW JSON with Gemini 3...")
-    workflow = generate_workflow(client, transcript)
+#     print("📄 Generating simple WORKFLOW JSON with Gemini 3...")
+#     workflow = generate_workflow(client, transcript)
 
-    WORKFLOW_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-    WORKFLOW_JSON_PATH.write_text(
-        json.dumps(workflow, indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
-    print(f"✅ Workflow JSON saved to {WORKFLOW_JSON_PATH}")
+#     WORKFLOW_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+#     WORKFLOW_JSON_PATH.write_text(
+#         json.dumps(workflow, indent=2, ensure_ascii=False),
+#         encoding="utf-8",
+#     )
+#     print(f"✅ Workflow JSON saved to {WORKFLOW_JSON_PATH}")
 
-    print("🖼  Generating workflow diagram with Nano Banana Pro...")
-    diagram_path = generate_workflow_diagram(client, workflow, DIAGRAM_IMAGE_PATH)
-    print(f"✅ Workflow diagram saved to {diagram_path}")
+#     print("🖼  Generating workflow diagram with Nano Banana Pro...")
+#     diagram_path = generate_workflow_diagram(client, workflow, DIAGRAM_IMAGE_PATH)
+#     print(f"✅ Workflow diagram saved to {diagram_path}")
 
-    print("\nDone!")
-    print("Your teammate can now:")
-    print(f"- Read workflow structure from: {WORKFLOW_JSON_PATH}")
-    print(f"- Display the diagram image from: {diagram_path}")
+#     print("\nDone!")
+#     print("Your teammate can now:")
+#     print(f"- Read workflow structure from: {WORKFLOW_JSON_PATH}")
+#     print(f"- Display the diagram image from: {diagram_path}")
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
