@@ -18,8 +18,7 @@ DIAGRAM_IMAGE_PATH = Path("assets/data/workflow_diagram.png")
 client = genai.Client()
 i = 0
 
-for filename in os.listdir("assets/workflow"):
-
+for filename in sorted(os.listdir("assets/workflow")):
 
     with open(f"assets/workflow/{filename}", 'rb') as f:
 
